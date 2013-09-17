@@ -689,6 +689,8 @@ $(document).ready(function () {
 		_delegate: function (el) {
 			// save local vars
 			var target = el.attr('data-rel');
+			this.close_on_url = el.attr('data-close-on-url') ;
+			this.on_close = el.attr('data-on-close') ;
 
 			// reset states
 			this._reset();
@@ -1153,7 +1155,13 @@ $(document).ready(function () {
 					messages.remove();
 
 				// determine if we should close the modal or reload
-				if(messages.length && that.enforceReload) CMS.API.Helpers.reloadBrowser();
+				if(messages.length && that.enforceReload) {
+					CMS.API.Helpers.reloadBrowser();
+				}
+				if(messages.length && that.on_close) {
+					if (that.on_close == 'REFRESH_PAGE') CMS.API.Helpers.reloadBrowser();
+					else CMS.API.Helpers.reloadBrowser(that.on_close)
+				}
 				if(messages.length && that.enforceClose) {
 					that.closeModal();
 					return false;
