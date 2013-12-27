@@ -1,3 +1,6 @@
+This is a fork of the Django-cms project, available at
+https://github.com/igloox/django-cms
+
 ##########
 django CMS
 ##########
